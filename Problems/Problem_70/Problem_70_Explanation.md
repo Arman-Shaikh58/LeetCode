@@ -24,3 +24,6 @@ Explanation: There are three ways to climb to the top.
 
 You can think of this problem like a binary tree btw this is a Dynamic Programming question (DP💀)
 
+# the explaination in the image i hope i can understand later :)
+
+![explanation image](image.png)

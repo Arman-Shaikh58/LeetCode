@@ -3,7 +3,8 @@ use std::io;
 fn main(){
     println!("Hello World");//hehe just for fun
     println!("Enter a Number");
-    let mut input= String::new();//string because when using 
+    let mut input= String::new();//string because when using String instead of str becusing String is used when we are assigning value at runtime not at the compile time,
+                                //  str is used when string is giving at the time of writing code
     io::stdin().read_line(&mut input).expect("Failed to read Input");
 
     let n = input.trim().parse().expect("Failed to parse the number");
