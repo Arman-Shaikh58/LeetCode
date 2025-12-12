@@ -1,3 +1,7 @@
+# ----------------------------------------
+# C / C++ Build Artifacts
+# ----------------------------------------
+
 # Prerequisites
 *.d
 
@@ -14,7 +18,7 @@
 # Linker files
 *.ilk
 
-# Debugger Files
+# Debugger files
 *.pdb
 
 # Compiled Dynamic libraries
@@ -37,5 +41,50 @@
 *.out
 *.app
 
-# debug information files
+# Debug info files
 *.dwo
+
+# ----------------------------------------
+# Rust Build Artifacts
+# ----------------------------------------
+
+# Target directory (Rust builds here)
+target/
+
+# Rust compiler output
+*.rlib
+
+# Rust dependencies folder (sometimes generated in tools)
+.dep/
+
+# Binaries produced by `cargo build`
+*.rmeta
+
+# Backup files created by rustfmt
+**/*.rs.bk
+
+# Cargo package outputs
+Cargo.lock          # (optional: keep this for end-apps, ignore for libraries)
+
+# If you're using rust-analyzer
+.rustc_info.json
+
+# Rust coverage output
+*.profraw
+*.profdata
+
+# ----------------------------------------
+# OS / Editor Misc
+# ----------------------------------------
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# VSCode
+.vscode/
+
+# JetBrains
+.idea/

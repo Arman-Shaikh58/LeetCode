@@ -1,7 +1,7 @@
 use std::io;
 //bruh i need some time to understand fck
 fn longest_palindrome(s: &str) -> String {
-    let chars: Vec<char> = s.chars().collect();
+    let chars: Vec<char> = s.chars().collect(); //chars function convert a string in itrator remember itrator is not a list or an array it a mechanism collect function converts that itrator into a list or here we can say it vector
     let n = chars.len();
 
     if n == 0 {
@@ -28,7 +28,7 @@ fn longest_palindrome(s: &str) -> String {
         }
     }
 
-    chars[start..=end].iter().collect()
+    chars[start..=end].iter().collect() //return the string
 }
 
 // helper: expand around center
