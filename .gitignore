@@ -88,3 +88,8 @@ Thumbs.db
 
 # JetBrains
 .idea/
+
+
+# Added by cargo
+
+/target
