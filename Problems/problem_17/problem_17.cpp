@@ -39,9 +39,7 @@ public:
 int main() {
     Solution sol;
 
-    string digits;
-    cout << "Enter digits (2-9): ";
-    cin >> digits;
+    string digits="234";
 
     vector<string> combinations = sol.letterCombinations(digits);
 
