@@ -1,0 +1,1 @@
+the reason i didnt solve any becase i forgot my laptop charger in hostel and i was back in the home i had my brothers laptop but he said dont install rust
