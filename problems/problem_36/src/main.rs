@@ -4,61 +4,24 @@ struct Solution;
 
 impl Solution {
     pub fn is_valid_sudoku(board: Vec<Vec<char>>) -> bool {
-        // horizontally
-        for row in 0..9 {
-            let mut seen = HashSet::new();
-
-            for col in 0..9 {
-                let ch = board[row][col];
-
-                if ch == '.' {
+        let mut ruleset: HashSet<String> = HashSet::new();
+        for i in 0..9 {
+            for j in 0..9 {
+                let current = board[i][j];
+                if current == '.' {
                     continue;
                 }
-
-                if !seen.insert(ch) {
+                let row = format!("{}_is_row_{}", current, j);
+                let column = format!("{}_is_column_{}", current, i);
+                let boxi: String = format!("{}_is_box_{}_{}", current, i / 3, j / 3);
+                if ruleset.contains(&row) || ruleset.contains(&column) || ruleset.contains(&boxi) {
                     return false;
                 }
+                ruleset.insert(row);
+                ruleset.insert(boxi);
+                ruleset.insert(column);
             }
         }
-
-        // verticvallay
-        for col in 0..9 {
-            let mut seen = HashSet::new();
-
-            for row in 0..9 {
-                let ch = board[row][col];
-
-                if ch == '.' {
-                    continue;
-                }
-
-                if !seen.insert(ch) {
-                    return false;
-                }
-            }
-        }
-
-        // check 3 by 3 box
-        for box_row in (0..9).step_by(3) {
-            for box_col in (0..9).step_by(3) {
-                let mut seen = HashSet::new();
-
-                for row in box_row..box_row + 3 {
-                    for col in box_col..box_col + 3 {
-                        let ch = board[row][col];
-
-                        if ch == '.' {
-                            continue;
-                        }
-
-                        if !seen.insert(ch) {
-                            return false;
-                        }
-                    }
-                }
-            }
-        }
-
         true
     }
 }
