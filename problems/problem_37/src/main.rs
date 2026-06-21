@@ -3,9 +3,9 @@ use std::process::Command;
 macro_rules! gen_rules {
     ($current:expr,$i:expr,$j:expr) => {
         (
-            format!("{}_row_{}", $current, $i),
-            format!("{}_column_{}", $current, $j),
-            format!("{}_box_{}_{}", $current, $i / 3, $j / 3),
+            ($current, 0, $i),
+            ($current, 1, $j),
+            ($current, 2, ($i / 3) * 3 + $j / 3),
         )
     };
 }
@@ -14,7 +14,7 @@ struct Solution;
 
 impl Solution {
     pub fn solve_sudoku(board: &mut Vec<Vec<char>>) {
-        let mut ruleset: HashSet<String> = HashSet::new();
+        let mut ruleset: HashSet<(char, usize, usize)> = HashSet::new();
 
         for i in 0..9 {
             for j in 0..9 {
@@ -30,7 +30,7 @@ impl Solution {
 
         fn backtrack(
             board: &mut Vec<Vec<char>>,
-            ruleset: &mut HashSet<String>,
+            ruleset: &mut HashSet<(char, usize, usize)>,
             i: usize,
             j: usize,
         ) -> bool {
@@ -46,7 +46,6 @@ impl Solution {
 
             for val in 1..=9 {
                 let digit = (b'0' + val as u8) as char;
-
                 let (r, c, b) = gen_rules!(digit, i, j);
 
                 if ruleset.contains(&r) || ruleset.contains(&c) || ruleset.contains(&b) {
@@ -55,20 +54,25 @@ impl Solution {
 
                 board[i][j] = digit;
 
-                ruleset.insert(r.clone());
-                ruleset.insert(c.clone());
-                ruleset.insert(b.clone());
+                ruleset.insert(r);
+                ruleset.insert(c);
+                ruleset.insert(b);
+
+                // clear_terminal();
+                // print_board(board);
 
                 if backtrack(board, ruleset, ni, nj) {
                     return true;
                 }
 
                 board[i][j] = '.';
-                clear_terminal();
-                print_board(board);
+
                 ruleset.remove(&r);
                 ruleset.remove(&c);
                 ruleset.remove(&b);
+
+                // clear_terminal();
+                // print_board(board);
             }
 
             false
