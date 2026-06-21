@@ -1,32 +1,26 @@
+use std::fmt::Write as _;
 use std::io;
-
 struct Solution;
 
 impl Solution {
     pub fn count_and_say(n: i32) -> String {
-        fn backtrack(n: i32) -> String {
-            if n <= 1 {
-                return "1".to_string();
-            }
-
-            let res: Vec<char> = backtrack(n - 1).chars().collect();
-            let mut rle = String::new();
-            let len = res.len();
-            let mut i = 0;
-            while i < len {
-                let mut count = 1;
-                while i < len - 1 && res[i] == res[i + 1] {
-                    count += 1;
-                    i += 1;
-                }
-                rle.push_str(count.to_string().as_str());
-                rle.push(res[i]);
-                i += 1;
-            }
-            println!("{rle}");
-            rle.chars().collect()
+        if n == 1 {
+            return String::from("1");
         }
-        backtrack(n)
+
+        let res = Self::count_and_say(n - 1);
+        let mut rle = String::new();
+        let mut run = (0, res.chars().next().unwrap());
+        for ch in res.chars() {
+            if ch == run.1 {
+                run.0 += 1;
+            } else {
+                write!(rle, "{}{}", run.0, run.1).unwrap();
+                run = (1, ch);
+            }
+        }
+        write!(rle, "{}{}", run.0, run.1).unwrap();
+        rle
     }
 }
 fn take_input() -> i32 {
